@@ -12,7 +12,18 @@ npm install crawlerx
 npm install js2xmlparser
 ```
 
-Run the code
+Install the dev dependencies 
+```
+npm install mocha
+npm install should
+```
+
+How to run the code
 ``` 
 node lib/index.js
+```
+
+How to run the tests
+``` 
+npm test
 ```
