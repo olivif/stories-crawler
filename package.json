@@ -12,8 +12,8 @@
     "url": "https://github.com/olivif/stories-crawler/issues"
   },
   "dependencies": {
-    "crawlerx": "~2.14.7",
-    "js2xmlparser": "~2.14.7"
+    "crawlerx": "~0.0.8",
+    "js2xmlparser": "~1.0.0"
   },
   "devDependencies": {
   },
