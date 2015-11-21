@@ -1,0 +1,23 @@
+{
+  "name": "stories-crawler",
+  "version": "0.0.01",
+  "description": "Stories crawler",
+  "main": "./lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/olivif/stories-crawler.git"
+  },
+  "bugs": {
+    "url": "https://github.com/olivif/stories-crawler/issues"
+  },
+  "dependencies": {
+    "crawlerx": "~2.14.7",
+    "js2xmlparser": "~2.14.7"
+  },
+  "devDependencies": {
+  },
+  "engines": {
+    "node": ">=4.2"
+  }
+}
+
