@@ -20,7 +20,7 @@
     "should": "~7.1.1"
   },
   "scripts": {
-    "test": "node_modules/.bin/mocha -w"
+    "test": "mocha test"
   },
   "engines": {
     "node": ">=4.2"
