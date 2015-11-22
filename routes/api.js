@@ -1,5 +1,5 @@
-var express = require('express');
-var crawler = require('./../lib/crawler');
+var express = require("express");
+var crawler = require("./../lib/crawler");
 var router = express.Router();
 
 /* GET api heartbeat. */

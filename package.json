@@ -14,11 +14,14 @@
     "jade": "~1.11.0",
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0",
-    "crawlerx": "~0.0.8",
-    "supertest": "~1.1.0",
+    "crawlerx": "~0.0.8"
+  },
+  "devDependencies": {
     "assert": "~1.3.0",
-    "should": "~7.1.1",
+    "coveralls": "^2.11.4",
     "describe": "~1.2.0",
-    "mocha": "~2.3.4"
+    "mocha": "~2.3.4",
+    "should": "~7.1.1",
+    "supertest": "~1.1.0"
   }
 }

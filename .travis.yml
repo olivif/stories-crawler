@@ -3,3 +3,5 @@ node_js:
   - "4.2"
 install:
   - npm install
+after_success:
+  - coveralls
