@@ -2,9 +2,12 @@ var express = require("express");
 var crawler = require("./../lib/crawler");
 var router = express.Router();
 
-/* GET api heartbeat. */
 router.get("/", function(request, response, next){
 	response.send("Api is running.");
+});
+
+router.get("/test", function(request, response, next){
+	throw "exception";
 });
 
 router.get("/stories", function(request, response, next){

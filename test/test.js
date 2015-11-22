@@ -42,11 +42,24 @@ describe("api", function () {
     // runs after each test in this block
   });
   
+  it("should not have unknown page", function (done) {
+
+    request(app)
+      .get("/unknown")
+      .expect(404, done); 
+  });
+  
+  it("should return 500 on exception", function (done) {
+
+    request(app)
+      .get("/api/test")
+      .expect(500, done);
+  });
+  
   it("should have an index", function (done) {
 
     request(app)
       .get("/")
-      .set('Accept', 'application/json') 
       .expect(200, done); 
   });
 
