@@ -1,29 +1,18 @@
 {
   "name": "stories-crawler",
-  "version": "0.0.01",
-  "description": "Stories crawler",
-  "main": "./lib/index.js",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/olivif/stories-crawler.git"
-  },
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/olivif/stories-crawler/issues"
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
   },
   "dependencies": {
-    "crawlerx": "~0.0.8",
-    "js2xmlparser": "~1.0.0"
-  },
-  "devDependencies": {
-    "mocha": "~2.3.4",
-    "should": "~7.1.1"
-  },
-  "scripts": {
-    "test": "mocha test"
-  },
-  "engines": {
-    "node": ">=4.2"
+    "body-parser": "~1.13.2",
+    "cookie-parser": "~1.3.5",
+    "debug": "~2.2.0",
+    "express": "~4.13.1",
+    "jade": "~1.11.0",
+    "morgan": "~1.6.1",
+    "serve-favicon": "~2.3.0",
+    "crawlerx": "~0.0.8"
   }
 }
-
