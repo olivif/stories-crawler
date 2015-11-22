@@ -11,7 +11,8 @@ router.get("/stories", function(request, response, next){
 	
 	// get stories from crawler
 	var storiesCallback = function(stories) {
-		response.send(stories);
+		var data = {stories: stories};
+		response.send(data);
 	};
 	
 	crawler.getStoriesFromCrawler(storiesCallback);
