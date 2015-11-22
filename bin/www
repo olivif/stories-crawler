@@ -4,9 +4,11 @@
  * Module dependencies.
  */
 
-var app = require('../main');
+var main = require('../main');
 var debug = require('debug')('stories-crawler:server');
 var http = require('http');
+
+var app = main.setupApp();
 
 /**
  * Get port from environment and store in Express.
