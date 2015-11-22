@@ -8,19 +8,12 @@ A small crawler for news websites
 
 Install the dependencies 
 ```
-npm install crawlerx
-npm install js2xmlparser
-```
-
-Install the dev dependencies 
-```
-npm install mocha
-npm install should
+npm install
 ```
 
 How to run the code
 ``` 
-node lib/index.js
+npm start
 ```
 
 How to run the tests
