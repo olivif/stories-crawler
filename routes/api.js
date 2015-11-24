@@ -1,5 +1,6 @@
+var storyProvider = require("./../lib/storyProvider");
+
 var express = require("express");
-var crawler = require("./../lib/crawler");
 var router = express.Router();
 
 router.get("/", function(request, response, next){
@@ -18,7 +19,7 @@ router.get("/stories", function(request, response, next){
 		response.send(data);
 	};
 	
-	crawler.getStoriesFromCrawler(storiesCallback);
+	storyProvider.getStories(storiesCallback);
 });
 
 module.exports = router;
