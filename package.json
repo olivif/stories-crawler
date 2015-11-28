@@ -24,6 +24,7 @@
     "gulp": "^3.9.0",
     "gulp-mocha": "^2.2.0",
     "istanbul": ">0.3.2",
+    "jscs": "^2.6.0",
     "mocha": "~2.3.4",
     "mocha-jsdom": "^1.0.0",
     "should": "~7.1.1",
