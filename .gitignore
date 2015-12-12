@@ -13,3 +13,5 @@ npm-debug.log
 # Code coverage
 coverage
 
+# MongoDB
+data
