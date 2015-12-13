@@ -9,9 +9,10 @@ var mongoose = require('mongoose');
 var routes = require("./routes/index");
 var api = require("./routes/api");
 
-mongoose.connect('mongodb://localhost/test');
+console.log("ConnectionString = " + process.env.MONGO_CONNECTION_STRING);
+mongoose.connect(process.env.MONGO_CONNECTION_STRING);
 
-function setupApp() {
+function setupApp() { 
 
   var app = express();
 

@@ -18,7 +18,8 @@ gulp.task('default', function(){
         script: './bin/www',
         ext: 'js',
         env: {
-            PORT:8000
+            PORT:8000,
+            MONGO_CONNECTION_STRING:"mongodb://localhost/test"
         },
         ignore: ['./node_modules/**']
     })
