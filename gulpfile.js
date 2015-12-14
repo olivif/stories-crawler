@@ -1,6 +1,16 @@
 var gulp = require("gulp");
 var mocha = require("gulp-mocha");
 var nodemon = require('gulp-nodemon');
+var env = require('gulp-env');
+
+/**
+ * Set test env
+ */
+gulp.task('set-env', function () {
+	env({
+		file: "env/test-env.json"
+	});
+});
 
 /**
  * Execute all tests.
@@ -13,7 +23,7 @@ gulp.task("run-tests", function() {
 /**
  * Run the API in a loop, restart when files change
  */
-gulp.task('default', function(){
+gulp.task('run-app', function(){
     nodemon({
         script: './bin/www',
         ext: 'js',
@@ -27,3 +37,6 @@ gulp.task('default', function(){
         console.log('Restarting');
     });
 });
+
+gulp.task('default', ['set-env', 'run-app'])
+gulp.task('test', ['set-env', 'run-tests'])

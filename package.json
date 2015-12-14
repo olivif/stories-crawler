@@ -24,6 +24,7 @@
     "codecov": ">1.0.0",
     "describe": "~1.2.0",
     "gulp": "^3.9.0",
+    "gulp-env": "^0.2.0",
     "gulp-mocha": "^2.2.0",
     "istanbul": ">0.3.2",
     "jscs": "^2.6.0",

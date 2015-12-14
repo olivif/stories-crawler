@@ -1,0 +1,4 @@
+{
+	"PORT":8000,
+	"MONGO_CONNECTION_STRING":"mongodb://localhost/test"
+}
