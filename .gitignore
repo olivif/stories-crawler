@@ -15,3 +15,5 @@ coverage
 
 # MongoDB
 data
+
+!test/data
