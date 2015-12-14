@@ -7,3 +7,6 @@ install:
   - npm install
 script: 
   - npm test 
+env:
+  - PORT=8000 MONGO_CONNECTION_STRING="mongodb://localhost/test"
+
