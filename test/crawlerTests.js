@@ -1,3 +1,4 @@
+var storyProvider = require("./../lib/storyProvider");
 var crawler = require("./../lib/crawler");
 var prothom = require("./../lib/parsers/prothom");
 var fs = require('fs');
@@ -67,3 +68,22 @@ describe("crawler", function() {
   });
   
 });
+
+// Test suite for story provider
+describe("story provider", function() {
+  
+  this.timeout(5000);
+  
+  it("should get stories from all parsers", function(done) {
+  
+    storyProvider.getStories(function(stories){
+      stories.should.be.array;
+      stories.should.not.be.empty;
+      
+      done();
+    });
+    
+  });
+
+});
+  
