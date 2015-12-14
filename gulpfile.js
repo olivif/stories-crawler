@@ -28,6 +28,7 @@ gulp.task('run-app', function(){
         script: './bin/www',
         ext: 'js',
         env: {
+            NODE_ENV: "development",
             PORT:8000,
             MONGO_CONNECTION_STRING:"mongodb://localhost/test"
         },
