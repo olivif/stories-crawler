@@ -43,7 +43,7 @@ describe("crawler", function() {
 
   // These tests actually pull data from the website,
   // so we need to increase the timeout. 
-  this.timeout(5000);
+  this.timeout(10000);
 
   it("should return valid stories from prothom", function(done) {
   
@@ -72,7 +72,7 @@ describe("crawler", function() {
 // Test suite for story provider
 describe("story provider", function() {
   
-  this.timeout(5000);
+  this.timeout(10000);
   
   it("should get stories from all parsers", function(done) {
   

@@ -17,7 +17,6 @@ describe("api", function() {
 
   // runs after all tests in this block
   after(function() {
-    main.disconnectFromDb();
   });
 
   it("should not have unknown page", function(done) {
