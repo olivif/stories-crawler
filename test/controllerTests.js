@@ -1,12 +1,4 @@
-var storyProvider = require("./../lib/storyProvider");
-var crawler = require("./../lib/crawler");
-var prothom = require("./../lib/parsers/prothom");
-var fs = require("fs");
-var jsdom = require("mocha-jsdom");
 var sinon = require("sinon");
-var clock = sinon.useFakeTimers();
-
-var main = require("./../main");
 
 var Story = require("./../lib/models/story");
 var Event = require("./../lib/models/event");
@@ -15,13 +7,9 @@ var storyProvider = require("./../lib/storyProvider");
 
 var storyControllerFactory = require("./../lib/controllers/storyController");
 
-var app; 
-
 // Test suite for story controller
-describe("story controller", function() {
+describe("story controller tests", function() {
   
-  this.timeout(10000);
-
   afterEach(function(done){
     Story.remove().exec();
     Event.remove().exec();
