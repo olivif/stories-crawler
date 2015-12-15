@@ -15,6 +15,8 @@ router.get("/test", function(request, response, next) {
   throw "exception";
 });
 
-router.get("/stories", storyController.get);
+router.get("/stories", function(request, response, next) {
+  storyController.get(request, response, null);
+});
 
 module.exports = router;
