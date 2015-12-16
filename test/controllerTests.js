@@ -12,21 +12,33 @@ describe("story controller tests", function() {
   
   var storyProvider;
   var storyController;
-
-  beforeEach(function(done){
+  var request;
+  var response;
+  
+  beforeEach( function(done) {
+    
     storyProvider = {
         getStories: function(callback) {
-          console.log("Getting fake stories");
           callback(generateFakeStories(Story, 2));
         }
       }
     
     storyController = storyControllerFactory(Story, Event, storyProvider);
+    sinon.spy(storyController, "refreshStories");
+    
+    request = {};
       
+    response = {
+      status: sinon.spy(),
+      send: sinon.spy(),
+      json: sinon.spy()
+    };
+
     done();
   })
         
   afterEach(function(done){
+    
     Story.remove().exec();
     Event.remove().exec();
 
@@ -47,25 +59,23 @@ describe("story controller tests", function() {
     return stories;
   }
   
+  function createLastUpdatedEvent(hoursOffset) {
+    
+      var newEvent = new Event();
+      newEvent.type = "LastUpdated";
+      
+      var lastUpdated = new Date();
+      lastUpdated.setHours(lastUpdated.getHours() - hoursOffset);
+      newEvent.date = lastUpdated;
+      
+      newEvent.save();
+  }
+  
   it("should refresh stories when there is no LastUpdated event", function(done) {
       
-      sinon.spy(storyController, "refreshStories");
-      
-      // Call get and make sure we have *any* stories
-      var request = {};
-      
-      var response = {
-        status: sinon.spy(),
-        send: sinon.spy(),
-        json: sinon.spy()
-      };
-      
       var next = function() {
-        console.log("I got called");  
 
         response.status.calledWith(200).should.equal(true);
-        // response.json.should.be.array;
-        // console.log("response.json = " + response.json);
         
         storyController.refreshStories.notCalled;
   
@@ -77,28 +87,9 @@ describe("story controller tests", function() {
 
   it("should refresh stories if LastUpdated is too long ago", function(done) {
     
-      // Create a last updated event and save it
-      var newEvent = new Event();
-      newEvent.type = "LastUpdated";
-      
-      var yesterday = new Date();
-      yesterday.setDate(yesterday.getDate() - 1);
-      newEvent.date = yesterday;
-      
-      newEvent.save();
-      
-      sinon.spy(storyController, "refreshStories");
-      
-      var request = {};
-      
-      var response = {
-        status: sinon.spy(),
-        send: sinon.spy(),
-        json: sinon.spy()
-      };
+      createLastUpdatedEvent(25);
       
       var next = function() {
-        console.log("I got called");  
 
         response.status.calledWith(200).should.equal(true);
         
@@ -111,30 +102,12 @@ describe("story controller tests", function() {
   });
   
   it("should just fetch stories if LastUpdated is too long ago", function(done) {
-    var newEvent = new Event();
-      newEvent.type = "LastUpdated";
-      
-      var lastUpdated = new Date();
-      lastUpdated.setHours(lastUpdated.getHours() - 2);
-      newEvent.date = lastUpdated;
-      
-      newEvent.save();
-      
-      sinon.spy(storyController, "refreshStories");
-      
-      var request = {};
-      
-      var response = {
-        status: sinon.spy(),
-        send: sinon.spy(),
-        json: sinon.spy()
-      };
+    
+      createLastUpdatedEvent(2);
       
       var next = function() {
-        console.log("I got called");  
 
         response.status.calledWith(200).should.equal(true);
-        // response.json.should.be.array;
         
         storyController.refreshStories.notCalled;
   
@@ -146,28 +119,9 @@ describe("story controller tests", function() {
   
   it("should clear old stories on refresh", function(done) {
     
-      // Create a last updated event and save it
-      var newEvent = new Event();
-      newEvent.type = "LastUpdated";
-      
-      var yesterday = new Date();
-      yesterday.setDate(yesterday.getDate() - 1);
-      newEvent.date = yesterday;
-      
-      newEvent.save();
-      
-      sinon.spy(storyController, "refreshStories");
-      
-      var request = {};
-      
-      var response = {
-        status: sinon.spy(),
-        send: sinon.spy(),
-        json: sinon.spy()
-      };
-      
+      createLastUpdatedEvent(25);
+
       var next = function() {
-        console.log("I got called");  
 
         response.status.calledWith(200).should.equal(true);
         
@@ -179,7 +133,6 @@ describe("story controller tests", function() {
         Event.remove().exec();
 
         var nextNext = function() {
-          console.log("I got called -next next");  
           
           response.status.calledWith(200).should.equal(true);
           
@@ -195,5 +148,4 @@ describe("story controller tests", function() {
       
       storyController.get(request, response, next);
   });
-  
 });
