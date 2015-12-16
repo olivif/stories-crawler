@@ -64,7 +64,8 @@ describe("story controller tests", function() {
         console.log("I got called");  
 
         response.status.calledWith(200).should.equal(true);
-        response.json.should.be.array;
+        // response.json.should.be.array;
+        // console.log("response.json = " + response.json);
         
         storyController.refreshStories.notCalled;
   
@@ -100,7 +101,6 @@ describe("story controller tests", function() {
         console.log("I got called");  
 
         response.status.calledWith(200).should.equal(true);
-        response.json.should.be.array;
         
         storyController.refreshStories.calledOnce;
   
@@ -110,12 +110,90 @@ describe("story controller tests", function() {
       storyController.get(request, response, next);
   });
   
-  xit("should just fetch stories if LastUpdated is too long ago", function(done) {
-      done();
+  it("should just fetch stories if LastUpdated is too long ago", function(done) {
+    var newEvent = new Event();
+      newEvent.type = "LastUpdated";
+      
+      var lastUpdated = new Date();
+      lastUpdated.setHours(lastUpdated.getHours() - 2);
+      newEvent.date = lastUpdated;
+      
+      newEvent.save();
+      
+      sinon.spy(storyController, "refreshStories");
+      
+      var request = {};
+      
+      var response = {
+        status: sinon.spy(),
+        send: sinon.spy(),
+        json: sinon.spy()
+      };
+      
+      var next = function() {
+        console.log("I got called");  
+
+        response.status.calledWith(200).should.equal(true);
+        // response.json.should.be.array;
+        
+        storyController.refreshStories.notCalled;
+  
+        done();
+      }
+      
+      storyController.get(request, response, next);
   });
   
-  xit("should clear old stories on refresh", function(done) {
-      done();
+  it("should clear old stories on refresh", function(done) {
+    
+      // Create a last updated event and save it
+      var newEvent = new Event();
+      newEvent.type = "LastUpdated";
+      
+      var yesterday = new Date();
+      yesterday.setDate(yesterday.getDate() - 1);
+      newEvent.date = yesterday;
+      
+      newEvent.save();
+      
+      sinon.spy(storyController, "refreshStories");
+      
+      var request = {};
+      
+      var response = {
+        status: sinon.spy(),
+        send: sinon.spy(),
+        json: sinon.spy()
+      };
+      
+      var next = function() {
+        console.log("I got called");  
+
+        response.status.calledWith(200).should.equal(true);
+        
+        storyController.refreshStories.calledOnce;
+
+        response.json.getCall(0).args[0].length.should.equal(2);
+        
+        // Now we clear the event and force another refresh
+        Event.remove().exec();
+
+        var nextNext = function() {
+          console.log("I got called -next next");  
+          
+          response.status.calledWith(200).should.equal(true);
+          
+          storyController.refreshStories.calledOnce;
+  
+          response.json.getCall(1).args[0].length.should.equal(2);
+          
+          done();
+        };
+               
+        storyController.get(request, response, nextNext);
+      }
+      
+      storyController.get(request, response, next);
   });
   
 });
