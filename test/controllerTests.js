@@ -50,9 +50,7 @@ describe("story controller tests", function() {
     var stories = [];
     
     for (var index = 0; index < n; index++) {
-      var story = new Story();
-      story.title = "Fake story " + index;
-      
+      var story = Story.createInstance("Fake story " + index, "Fake summary", "Fake body", new Date(), "http://fakesource", "http://fakeimgurl");
       stories.push(story);
     }
     
@@ -60,25 +58,35 @@ describe("story controller tests", function() {
   }
   
   function createLastUpdatedEvent(hoursOffset) {
-    
-      var newEvent = new Event();
-      newEvent.type = "LastUpdated";
-      
-      var lastUpdated = new Date();
-      lastUpdated.setHours(lastUpdated.getHours() - hoursOffset);
-      newEvent.date = lastUpdated;
-      
+
+      var date = new Date();
+      date.setHours(date.getHours() - hoursOffset);
+
+      var newEvent = Event.createInstance("LastUpdated", date);
       newEvent.save();
   }
+  
+  it("should not refresh stories on LastUpdated event fetch failed", function(done) {
+      
+      var findOneEventStub = sinon.stub(Event, "findOne");
+      findOneEventStub.onCall(0).yields("Some error", null);
+      
+      var next = function() {
+        response.status.calledWith(200).should.equal(true);
+        storyController.refreshStories.notCalled;
+        findOneEventStub.restore(); 
+        
+        done();
+      }
+      
+      storyController.get(request, response, next);
+  });
   
   it("should refresh stories when there is no LastUpdated event", function(done) {
       
       var next = function() {
-
         response.status.calledWith(200).should.equal(true);
-        
         storyController.refreshStories.notCalled;
-  
         done();
       }
       
@@ -90,27 +98,41 @@ describe("story controller tests", function() {
       createLastUpdatedEvent(25);
       
       var next = function() {
-
         response.status.calledWith(200).should.equal(true);
-        
         storyController.refreshStories.calledOnce;
-  
         done();
       }
       
       storyController.get(request, response, next);
   });
   
-  it("should just fetch stories if LastUpdated is too long ago", function(done) {
+  it("should refresh stories if LastUpdated is too long ago and return empty if saving new stories failed", function(done) {
+  
+    var storyStub = sinon.stub(Story, "create");
+    storyStub.onCall(0).yields("Some error", null);
+
+    createLastUpdatedEvent(25);
+    
+    var next = function() {
+      response.status.calledWith(200).should.equal(true);
+      storyController.refreshStories.calledOnce;
+      response.json.getCall(0).args[0].stories.length.should.equal(0);
+      
+      storyStub.restore();
+      
+      done();
+    }
+    
+    storyController.get(request, response, next);
+});
+
+  it("should just fetch stories if LastUpdated is not too long ago", function(done) {
     
       createLastUpdatedEvent(2);
       
       var next = function() {
-
         response.status.calledWith(200).should.equal(true);
-        
         storyController.refreshStories.notCalled;
-  
         done();
       }
       
@@ -124,20 +146,15 @@ describe("story controller tests", function() {
       var next = function() {
 
         response.status.calledWith(200).should.equal(true);
-        
         storyController.refreshStories.calledOnce;
-
         response.json.getCall(0).args[0].stories.length.should.equal(2);
         
         // Now we clear the event and force another refresh
         Event.remove().exec();
 
         var nextNext = function() {
-          
           response.status.calledWith(200).should.equal(true);
-          
           storyController.refreshStories.calledOnce;
-  
           response.json.getCall(1).args[0].stories.length.should.equal(2);
           
           done();
@@ -148,4 +165,5 @@ describe("story controller tests", function() {
       
       storyController.get(request, response, next);
   });
+    
 });
