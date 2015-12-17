@@ -58,14 +58,11 @@ describe("story controller tests", function() {
   }
   
   function createLastUpdatedEvent(hoursOffset) {
-    
-      var newEvent = new Event();
-      newEvent.type = "LastUpdated";
-      
-      var lastUpdated = new Date();
-      lastUpdated.setHours(lastUpdated.getHours() - hoursOffset);
-      newEvent.date = lastUpdated;
-      
+
+      var date = new Date();
+      date.setHours(date.getHours() - hoursOffset);
+
+      var newEvent = Event.createInstance("LastUpdated", date);
       newEvent.save();
   }
   
