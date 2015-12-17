@@ -127,7 +127,7 @@ describe("story controller tests", function() {
         
         storyController.refreshStories.calledOnce;
 
-        response.json.getCall(0).args[0].length.should.equal(2);
+        response.json.getCall(0).args[0].stories.length.should.equal(2);
         
         // Now we clear the event and force another refresh
         Event.remove().exec();
@@ -138,7 +138,7 @@ describe("story controller tests", function() {
           
           storyController.refreshStories.calledOnce;
   
-          response.json.getCall(1).args[0].length.should.equal(2);
+          response.json.getCall(1).args[0].stories.length.should.equal(2);
           
           done();
         };
