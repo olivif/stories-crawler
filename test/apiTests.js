@@ -55,13 +55,6 @@ describe("api", function() {
       .expect(500, done);
   });
   
-  it("should have an index", function(done) {
-
-    request(app)
-      .get("/")
-      .expect(200, done);
-  });
-
   it("should have /api", function(done) {
 
     request(app)
