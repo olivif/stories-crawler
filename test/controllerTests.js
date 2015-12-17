@@ -50,9 +50,7 @@ describe("story controller tests", function() {
     var stories = [];
     
     for (var index = 0; index < n; index++) {
-      var story = new Story();
-      story.title = "Fake story " + index;
-      
+      var story = Story.createInstance("Fake story " + index, "Fake summary", "Fake body", new Date(), "http://fakesource", "http://fakeimgurl");
       stories.push(story);
     }
     

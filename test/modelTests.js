@@ -15,22 +15,9 @@ describe("models", function() {
   var source = "http://google.com";
   var previewImg = "http://previewUrl";
   
-  function createValidStory() {
-      
-      var story = new Story();
-      story.title = title;
-      story.summary = summary;
-      story.body = body;
-      story.date = date;
-      story.source = source;
-      story.previewImg = previewImg;
-
-      return story;    
-  }
-
   function checkRequiredProperty(property, done) {
     
-    var story = createValidStory();
+    var story = Story.createInstance(title, summary, body, date, source, previewImg);
     story[property] = null;
     
     story.save(function(validationError){
@@ -47,7 +34,7 @@ describe("models", function() {
 
     it("should create a story with all valid fields", function(done) {
 
-      var story = createValidStory();
+      var story = Story.createInstance(title, summary, body, date, source, previewImg);
       
       story.should.have.property("title", title);
       story.should.have.property("summary", summary);
