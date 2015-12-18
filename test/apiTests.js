@@ -62,4 +62,22 @@ describe("api", function() {
       .expect(200, done);
   });
 
+  it("should return data on /api/stories", function(done) {
+
+    this.timeout(10000);
+
+    request(app)
+      .get("/api/stories")
+      .expect(200)
+      .end(function(error, result) {
+        should.not.exist(error);
+        result.should.not.be.null;
+        result.body.should.not.be.null;
+        result.body.stories.should.not.be.null;
+        result.body.stories.should.be.array;
+        result.body.stories.length.should.be.above(0);
+        done();
+      });
+  });
+  
 });
