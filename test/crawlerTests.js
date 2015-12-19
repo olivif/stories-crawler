@@ -71,13 +71,14 @@ describe("crawler", function() {
 // Test suite for story provider
 describe("story provider", function() {
   
-  this.timeout(20000);
+  this.timeout(10000);
   
   it("should get stories from all parsers", function(done) {
   
     storyProvider.getStories(function(stories){
       stories.should.be.array;
       stories.should.not.be.empty;
+      stories.length.should.be.above(0);
       
       done();
     });

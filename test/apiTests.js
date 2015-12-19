@@ -1,22 +1,18 @@
 var should = require("should");
-var assert = require("assert");
 var request = require("supertest");
-var db = require('mongoose');
+var sinon = require('sinon');
 
 var main = require("./../main");
+
+var storyProvider = require("./../lib/storyProvider");
 
 // Test suite for api routing
 describe("api", function() {
 
   var app;
-
-  // runs before all tests in this block
+  
   before(function() {
     app = main.setupApp();
-  });
-
-  // runs after all tests in this block
-  after(function() {
   });
 
   it("should not have unknown page", function(done) {
@@ -64,7 +60,8 @@ describe("api", function() {
 
   it("should return data on /api/stories", function(done) {
 
-    this.timeout(20000);
+    this.timeout(10000);
+    process.env.MAX_STORIES = 2;
 
     request(app)
       .get("/api/stories")
