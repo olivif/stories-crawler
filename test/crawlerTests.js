@@ -71,7 +71,7 @@ describe("crawler", function() {
 // Test suite for story provider
 describe("story provider", function() {
   
-  this.timeout(10000);
+  this.timeout(20000);
   
   it("should get stories from all parsers", function(done) {
   

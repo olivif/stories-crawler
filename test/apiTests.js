@@ -64,7 +64,7 @@ describe("api", function() {
 
   it("should return data on /api/stories", function(done) {
 
-    this.timeout(10000);
+    this.timeout(20000);
 
     request(app)
       .get("/api/stories")
