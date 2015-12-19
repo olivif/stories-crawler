@@ -1,5 +1,6 @@
 {
 	"PORT":8000,
 	"MONGO_CONNECTION_STRING":"mongodb://localhost/test",
-	"NODE_ENV":"development"
+	"NODE_ENV":"development",
+	"MAX_STORIES":10
 }

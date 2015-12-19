@@ -166,4 +166,23 @@ describe("story controller tests", function() {
       storyController.get(request, response, next);
   });
     
+    it("should send empty stories if can't get data from db", function(done) {
+  
+      var findStoryStub = sinon.stub(Story, "find");
+      findStoryStub.onCall(0).yields("Some error", null);
+      
+      createLastUpdatedEvent(2);
+      
+      var next = function() {
+        response.status.calledWith(200).should.equal(true);
+        storyController.refreshStories.notCalled;
+        storyController.sendStories.calledOnce;
+        response.json.getCall(0).args[0].stories.length.should.equal(0);
+        findStoryStub.restore();
+        done();
+      }
+      
+      storyController.get(request, response, next);
+    });
+      
 });

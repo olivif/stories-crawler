@@ -28,7 +28,6 @@ describe("parsers", function() {
       story.should.have.property("title", "Jamaat mulls over future");
       story.should.have.property("summary");
       story.should.have.property("body", null);
-      story.should.have.property("date", null);
       story.should.have.property("source", "http://www.en.prothom-alo.com/news/86863/Jamaat-mulls-over-future");
       story.should.have.property("previewImg", "http://www.en.prothom-alo.com/contents/cache/images/200x150x1/uploads/media/2015/11/24/x192467f4ce4dd52fb26a09cb3e4b97a6-27.1.jpg");
 
@@ -79,6 +78,7 @@ describe("story provider", function() {
     storyProvider.getStories(function(stories){
       stories.should.be.array;
       stories.should.not.be.empty;
+      stories.length.should.be.above(0);
       
       done();
     });
