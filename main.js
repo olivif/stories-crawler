@@ -15,10 +15,6 @@ function connectToDb() {
   mongoose.connect(process.env.MONGO_CONNECTION_STRING);
 }
 
-function disconnectFromDb() {
-  mongoose.disconnect();
-}
-
 function setViews() {
   app.set("views", path.join(__dirname, "views"));
   app.set("view engine", "jade");
@@ -85,7 +81,6 @@ setupApp();
 
 module.exports = {
   connectToDb: connectToDb,
-  disconnectFromDb: disconnectFromDb,
   setViews: setViews,
   setupAppConfiguration: setupAppConfiguration,
   setupRoutes: setupRoutes,
