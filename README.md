@@ -18,3 +18,6 @@ Install dependencies with `npm install` and then run with `gulp`. This will star
 #### Testing 
 All the tests are in the root folder under `test` and you can run them using `npm test`, which uses mocha under the hood.
 
+#### How to deploy
+See instructions on how to deploy to an Amazon EC2 instance in the [mongodb-deployment-guid.md](https://github.com/olivif/stories-crawler/blob/master/mongodb-deployment-guide.md). 
+
