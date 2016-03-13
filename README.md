@@ -8,17 +8,13 @@ A small crawler for news websites
 
 ### Getting started
 
-Install the dependencies 
-```
-npm install
-```
+First clone or fork the [repo](https://github.com/olivif/stories-crawler.git). 
 
-How to run the code
-``` 
-npm start
-```
+#### Running locally
+You will need to have mongodb installed locally and running before you run `stories-crawler`.  
+ 
+Install dependencies with `npm install` and then run with `gulp`. This will start the api on `localhost:8000`. You can verify it's running by going to `https://localhost:8000/api`.  
 
-How to run the tests
-``` 
-npm test
-```
+#### Testing 
+All the tests are in the root folder under `test` and you can run them using `npm test`, which uses mocha under the hood.
+
